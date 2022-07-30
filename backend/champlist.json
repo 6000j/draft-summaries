@@ -1,0 +1,30 @@
+{
+    "datatype":"List of Champions",
+
+    "champions": [
+        {
+            "name": "Ahri",
+            "damageType": "Magical",
+            "range": "3",
+
+            "abilities": [
+                {
+                    "name": "Essence Theft"
+
+                },
+                {
+
+                    "name": "Orb of Deception",
+                    "features": [
+                        "Damage"
+                    ]
+                }
+            ]
+        }
+
+
+
+
+    ]
+
+}

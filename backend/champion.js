@@ -12,17 +12,19 @@ class Champion {
     // Returns the ability in a specified spot
     getAbilityBySlot(slot) {
         switch(slot) {
-            case 'q':
+            case 'p':
                 return this.abilities[0];
-                break;
-            case 'w':
+            case 'q':
                 return this.abilities[1];
                 break;
-            case 'e':
+            case 'w':
                 return this.abilities[2];
                 break;
-            case 'r':
+            case 'e':
                 return this.abilities[3];
+                break;
+            case 'r':
+                return this.abilities[4];
                 break;
             default:
                 return undefined;
