@@ -80,3 +80,71 @@ export const CHALLENGE_COMMAND = {
   ],
   type: 1,
 };
+
+export const FULL_DRAFT_COMMAND = {
+  name: 'draft',
+  description: 'Create a full draft from the 10 given picks',
+  options: [
+    {
+      type: 3,
+      name: 'b1',
+      description: 'Blue side first pick',
+      required: true,
+    },
+    {
+      type: 3,
+      name: 'b2',
+      description: 'Blue side second pick',
+      required: true,
+    },
+    {
+      type: 3,
+      name: 'b3',
+      description: 'Blue side third pick',
+      required: true,
+    },
+    {
+      type: 3,
+      name: 'b4',
+      description: 'Blue side fourth pick',
+      required: true,
+    },
+    {
+      type: 3,
+      name: 'b5',
+      description: 'Blue side fifth pick',
+      required: true,
+    },
+    {
+      type: 3,
+      name: 'r1',
+      description: 'Red side first pick',
+      required: true,
+    },
+    {
+      type: 3,
+      name: 'r2',
+      description: 'Red side second pick',
+      required: true,
+    },
+    {
+      type: 3,
+      name: 'r3',
+      description: 'Red side third pick',
+      required: true,
+    },
+    {
+      type: 3,
+      name: 'r4',
+      description: 'Red side fourth pick',
+      required: true,
+    },
+    {
+      type: 3,
+      name: 'r5',
+      description: 'Red side fifth pick',
+      required: true,
+    },
+  ],
+  type: 1
+}
