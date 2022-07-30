@@ -4,10 +4,12 @@ class Champion {
         this.abilities = [];
     }
 
+    // Returns all abilities
     getAllAbilities() {
         return this.abilities;
     }
 
+    // Returns the ability in a specified spot
     getAbilityBySlot(slot) {
         switch(slot) {
             case 'q':
@@ -31,5 +33,10 @@ class Champion {
     // Returns all the abilities the champ has with a specified feature (i.e engage, peel, poke, etc.)
     getAbilitiesByFeature(feature) {
         return this.abilities.filter(x => x.features.includes(feature));
+    }
+
+    // Returns a summary of the "stats" this champ has. 
+    getSummary() {
+        return this.stats;
     }
 }
