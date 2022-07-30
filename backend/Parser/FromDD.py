@@ -50,7 +50,7 @@ def parseChampFromFile(input):
     # print(ahri)
     # print((ahri["data"])["spells"])
     # print(ahri['data']['Ahri'].keys())
-    champ = champCore['data'][(champCore['data'].keys()[0])]
+    champ = champCore['data'][list(champCore['data'].keys())[0]]
     # print(ahriUseful['stats'])
     # print(ahri['spells'][0].keys())
 
@@ -80,22 +80,30 @@ def parseChampFromFile(input):
 
 
     # target.write(json.dumps(oup, indent=4))
+    print(json.dumps(oup, indent=4))
     return(json.dumps(oup, indent=4))
+    
     # k.close()
 
 # Below code taken from https://stackoverflow.com/questions/10377998/how-can-i-iterate-over-files-in-a-given-directory
 directory_in_str = "backend/Parser/ChampFiles"
-directory = os.fsencode(directory_in_str) 
+directory =  "backend/Parser/ChampFiles"
 
-output = open("backend/parser/OutputChamps.json", 'a')
 
-for file in os.listdir(directory):
-     filename = os.fsdecode(file)
-     if filename.endswith(".json"): 
-         # print(os.path.join(directory, filename))
-         continue
-     else:
-         continue
+
+aggregator = {}
+
+for file in os.scandir(directory):
+     if file.name[-5:] == ".json": 
+        print(file.name)
+        f = open(directory_in_str + "/" +  file.name, 'r', encoding="utf-8")
+        aggregator[(file.name[:-5])] = parseChampFromFile(f.read())
+        f.close()
+
+out = open("backend/parser/OutputChamps.json", 'a')
+out.write(json.dumps(aggregator, indent=4))
+        
+out.close()
 
 
 #nprint(oup)
