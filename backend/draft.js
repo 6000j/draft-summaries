@@ -137,15 +137,21 @@ class Draft {
         let bScaling = this.getScoresOfChamps(this.bluePicks, "scaling");
         let rScaling = this.getScoresOfChamps(this.redPicks, "scaling");
 
-        this.checkEngageValidity();
+        this.checkEngageValidity(complaints);
 
-        this.checkScoreValidity("damage", )
+        this.checkScoreValidity(complaints, "damage", 12, 0, "damage");
+
+        this.checkScoreValidity(complaints, "range", 0, 4, "range");
+
+        this.checkScoreValidity(complaints, "frontline", 9, 3, "frontline");
+
+
+        return complaints;
 
     }
 
     // hmm
-    checkEngageValidity() {
-        let complaints = []
+    checkEngageValidity(complaints) {
 
         // Engage
         let bEngage = this.getChampsWithFeature(this.bluePicks, "engage");
@@ -159,12 +165,19 @@ class Draft {
             complaints.push("Red side does not have any engage!");
         }
         
-        return complaints;
+        // return complaints;
     }
 
-    checkScoreValidity(score, sumWanted, peakWanted, niceVersion) {
-        let complaints = [];
-        l
+    /**
+     * 
+     * @param {*} complaints
+     * @param {*} score Checks if a team mets the heuristic reqs
+     * @param {*} sumWanted 
+     * @param {*} peakWanted 
+     * @param {*} niceVersion 
+     */
+    checkScoreValidity(complaints, score, sumWanted, peakWanted, niceVersion) {
+        
         // Scores
         let bScore = this.getScoresOfChamps(this.bluePicks, score);
         let rScore = this.getScoresOfChamps(this.redPicks, score);
@@ -181,5 +194,20 @@ class Draft {
         if (this.highestElt(rScore) < peakWanted) {
             complaints.push("Red side is all low at " + niceVersion + "!");
         }
+
+        // return complaints;
+    }
+
+    // Requires drafts be in order!
+    checkEarlygames(complaints) {
+        let bScore = this.getScoresOfChamps(this.bluePicks, "earlyGamePrio");
+        let rScore = this.getScoresOfChamps(this.redPicks, "earlyGamePrio");
+
+        for (let i = 0; i < 5; i++) {
+            if (Math.abs(bScore[i] - rScore) > 2) {
+                complaints.push("Dispcrepancy in laning power in " + i.toString());
+            }
+        }
+
     }
 }
