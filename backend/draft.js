@@ -1,3 +1,5 @@
+import {ChampsData} from './champsListData.js'
+
 class Draft {
 
     // Empty constructor
