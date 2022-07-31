@@ -76,7 +76,13 @@ def parseChampFromString(input):
     spells = champ['spells']
 
     oup = {}
-
+    oup["scores"] = {
+        "damage" : 0,
+        "range" : 0,
+        "frontline" : 0,
+        "earlyGamePrio" : 0,
+        "scaling" : 0
+    }
     oup["name"] = champ['name']
     oup["stats"] = champ['stats']
 
@@ -131,10 +137,17 @@ def convert_all_champs():
             oup = parseChampFromString(f.read())
             aggregator[(file.name[:-5])] = oup.replace("\\n", "\n")
             f.close() """
+    boringStuff = json.dumps(aggregator)
     stuffToWrite = json.dumps(aggregator, indent=4) # .replace("\\n", "\n")
-    out = open("backend/parser/OutputChamps.json", 'w')
+    boringStuff = boringStuff.replace("'", "\\\\\'")
+    stuffToWrite = stuffToWrite.replace("'", "\\\\\'")
+    out = open("backend/parser/OutputChampsNice.json", 'w')
     out.write(stuffToWrite)
             
+    out.close()
+
+    out = open("backend/Parser/OutputChampsRaw.json", 'w')
+    out.write(boringStuff)
     out.close()
 
 convert_all_champs()
