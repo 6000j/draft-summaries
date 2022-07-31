@@ -94,4 +94,92 @@ class Draft {
         return features;
     }
 
+    
+
+
+    // Gets the list of champs with a given feature in a given list
+    getChampsWithFeature(toCheck, feature) {
+        return toCheck.filter(x => x.features.includes(feature));
+    }
+
+    // Returns an array with each element equal to the scores of a given type from the input array
+    getScoresOfChamps(toCheck, score) {
+        return toCheck.map(x => x.scores[score]);
+    }
+
+
+    // yes this is a sum of elements. yep
+    sumOfElts(inp) {
+        return inp.reduce((a,b) => a+b);
+    }
+
+    highestElt(inp) {
+        return inp.reduce((a,b) => Math.max(a,b));
+    }
+
+    // Runs a basic heuristic test
+    analyseBasicFeatures() {
+        let complaints = [];
+
+        // Damage
+        let bDamage = this.getScoresOfChamps(this.bluePicks, "damage");
+        let rDamage = this.getScoresOfChamps(this.redPicks, "damage");
+        // Range
+        let bRange = this.getScoresOfChamps(this.bluePicks, "range");
+        let rRange = this.getScoresOfChamps(this.redPicks, "range");
+        // Range
+        let bFrontline = this.getScoresOfChamps(this.bluePicks, "frontline");
+        let rFrontline = this.getScoresOfChamps(this.redPicks, "frontline");
+        // Range
+        let bPrio = this.getScoresOfChamps(this.bluePicks, "earlyGamePrio");
+        let rPrio = this.getScoresOfChamps(this.redPicks, "earlyGamePrio");
+        // Range
+        let bScaling = this.getScoresOfChamps(this.bluePicks, "scaling");
+        let rScaling = this.getScoresOfChamps(this.redPicks, "scaling");
+
+        this.checkEngageValidity();
+
+        this.checkScoreValidity("damage", )
+
+    }
+
+    // hmm
+    checkEngageValidity() {
+        let complaints = []
+
+        // Engage
+        let bEngage = this.getChampsWithFeature(this.bluePicks, "engage");
+        let rEngage = this.getChampsWithFeature(this.redPicks, "engage");
+
+        // Complaining about engage
+        if (bEngage.length === 0) {
+            complaints.push("Blue side does not have any engage!");
+        }
+        if (rEngage.length === 0) {
+            complaints.push("Red side does not have any engage!");
+        }
+        
+        return complaints;
+    }
+
+    checkScoreValidity(score, sumWanted, peakWanted, niceVersion) {
+        let complaints = [];
+        l
+        // Scores
+        let bScore = this.getScoresOfChamps(this.bluePicks, score);
+        let rScore = this.getScoresOfChamps(this.redPicks, score);
+
+        if (this.sumOfElts(bScore) < sumWanted) {
+            complaints.push("Blue side is low on " + niceVersion + "!");
+        }
+        if (this.sumOfElts(rScore) < sumWanted) {
+            complaints.push("Red side is low on " + niceVersion + "!");
+        }
+        if (this.highestElt(bScore) < peakWanted) {
+            complaints.push("Blue side is all low at " + niceVersion + "!");
+        }
+        if (this.highestElt(rScore) < peakWanted) {
+            complaints.push("Red side is all low at " + niceVersion + "!");
+        }
+    }
 }
