@@ -22,6 +22,14 @@ class Draft {
         this.redPicks = picks.slice(5);
     }
 
+    // look i need a way to accept string input ok
+    // please don't bully
+    pickChampFromString(champName) {
+        this.pickChamp(ChampsData.champName);
+    }
+
+
+    // Takes in the champ as an object
     pickChamp(champ) {
         switch(this.calculateLengthInProg()) {
             case 0:
@@ -78,6 +86,12 @@ class Draft {
         return this.bluePicks.length + this.redPicks.length;
     }
 
-
+    getFeaturesForAllChamps() {
+        let features = [];
+        for (let i = 0; i < this.picks.length; i++) {
+            features[i] = this.picks[i].features;
+        }
+        return features;
+    }
 
 }

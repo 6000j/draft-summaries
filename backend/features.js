@@ -8,9 +8,13 @@ class Feature {
 
     static Engage = new Feature("engage");
     static PrimaryEngage = new Feature("primaryEngage");
-    
+
     
     static Poke = new Feature("poke");
+
+    static SelfHealing = new Feature("selfHealing");
+
+    
 
     constructor(name) {
         this.name = name;
